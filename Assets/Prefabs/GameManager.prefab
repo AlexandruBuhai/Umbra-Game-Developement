@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1519831296468210}
+  m_IsPrefabParent: 1
+--- !u!1 &1519831296468210
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4550990103046018}
+  - component: {fileID: 114511113573991156}
+  - component: {fileID: 114053501075607194}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4550990103046018
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1519831296468210}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.24978516, y: 0.40466392, z: -1.0292969}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114053501075607194
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1519831296468210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f7c26108f80841469eaed7b0e77ae1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114511113573991156
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1519831296468210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2a1033c1e6a1cc469965ef89aa98115, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  columns: 20
+  rows: 20
+  exitFront: {fileID: 1112473009119528, guid: 7111169b558b0ff4d86fa73dec710673, type: 2}
+  exitBottom: {fileID: 1277329810820356, guid: c1861de6a3201fd4baa5a77ab10df921, type: 2}
+  exitLeft: {fileID: 1537652106296840, guid: bad5e3611fd7f874ebe3d865455834ee, type: 2}
+  exitRight: {fileID: 1268569196353730, guid: 26fed3d21db7fec44b76c3dfd1c99aa1, type: 2}
+  floorTiles:
+  - {fileID: 1939642570096334, guid: 9ebd797474561cd4a8d881c50cfa6a4a, type: 2}
+  enemyTiles:
+  - {fileID: 1277872663998912, guid: ed009de0c747783418be536fda61fd44, type: 2}
+  - {fileID: 1247238080394336, guid: 8a5c03349c3695b49ad2e925e25d56b3, type: 2}
+  outerWallTilesRight:
+  - {fileID: 1181288256013370, guid: 35045b4fbe222f94988062364dba90a7, type: 2}
+  outerWallTilesTop1:
+  - {fileID: 1223275256356366, guid: 12777fb8a7811344585f6bb091a205a6, type: 2}
+  - {fileID: 1423723862747430, guid: 6758911ec560ed24a9478ee56f7149fc, type: 2}
+  outerWallTilesTop2:
+  - {fileID: 1403945733792972, guid: 87117be539232c442a2606e2896f9105, type: 2}
+  outerWallTilesTop:
+  - {fileID: 1733299350202368, guid: 3c03fc5a51194374f94cc78f9a1b685c, type: 2}
+  outerWallTilesLeft:
+  - {fileID: 1548534973082684, guid: 467773865f3c80b4e811ecd7d77c4c6e, type: 2}
+  outerWallTilesBottom:
+  - {fileID: 1964974868257680, guid: e6d334989b0d16a45ad0701386752bfb, type: 2}
+  obstacles: []
+  outerCornerTopLeft: {fileID: 1948208777378116, guid: ba1f915c36580b2418200ab5bd92219c,
+    type: 2}
+  outerCornerTopRight: {fileID: 1336320384017672, guid: 1a2b9dcb259f775428d754ece655f990,
+    type: 2}
+  outerCornerBottomLeft: {fileID: 1367630341571412, guid: 1911826a29e6ba748a1e9c319f737af7,
+    type: 2}
+  outerCornerBottomRight: {fileID: 1982954931793166, guid: bec8524b4b56af249abdb4278ea9c278,
+    type: 2}
+  mapBorders: {fileID: 1058950452613760, guid: dc5d037f3f976d041b31c811ebb8afe0, type: 2}
+  CM_vcam1: {fileID: 0}

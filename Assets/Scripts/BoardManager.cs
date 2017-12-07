@@ -40,7 +40,7 @@ public class BoardManager : MonoBehaviour
     public GameObject outerCornerBottomRight;
    // public GameObject cineMachine; //not used
     public GameObject mapBorders;
-    public GameObject CM_vcam1;
+   // public GameObject CM_vcam1;
 
     private Transform boardHolder;                                  //A variable to store a reference to the transform of our Board object.
     private List <Vector3> gridPositions = new List <Vector3> ();   //A list of possible locations to place tiles.
@@ -65,7 +65,7 @@ public class BoardManager : MonoBehaviour
 
         //Instantiate Board and set boardHolder to its transform.
        // Instantiate(CM_vcam1);
-        //boardHolder = new GameObject ("Board").transform;
+        boardHolder = new GameObject ("Board").transform;
         //mapBorders = new GameObject();
         //mapBorders.transform.position = new Vector3(0, 0, 0);
        // mapBorders.transform.localScale = new Vector3(1, 1, 0);
@@ -74,7 +74,7 @@ public class BoardManager : MonoBehaviour
         mapBorderCollider.offset = new Vector3(columns/2+0.5f, rows/2+0.5f);
 
         //Instantiate(mapBorders);
-
+       
         //GameObject inst = Instantiate(leftWallCollider, new Vector3(-1, -1, 0f), Quaternion.identity) as GameObject;
         //inst.transform.SetParent(boardHolder);
 
@@ -204,19 +204,19 @@ public class BoardManager : MonoBehaviour
             //Choose a position for randomPosition by getting a random position from our list of available Vector3s stored in gridPosition
             Vector3 randomPosition = RandomPosition();
 
-            for(int j = 0; j < 10; ++j)
-            {
-                
-                if (tileArray == obstacles)
-                {
-                    if (randomPosition.y == columns || randomPosition.y == columns - 1)
-                    {
-                        randomPosition = RandomPosition();
-                    }
-                    else
-                        break;
-                }
-            }
+//            for(int j = 0; j < 10; ++j)
+//            {
+//                
+//                if (tileArray == obstacles)
+//                {
+//                    if (randomPosition.y == columns || randomPosition.y == columns - 1)
+//                    {
+//                        randomPosition = RandomPosition();
+//                    }
+//                    else
+//                        break;
+//                }
+//            }
            
 
           
@@ -226,6 +226,7 @@ public class BoardManager : MonoBehaviour
             //Instantiate tileChoice at the position returned by RandomPosition with no change in rotation
             Instantiate(tileChoice, randomPosition, Quaternion.identity);
         }
+       
     }
 
         public void SetupScene (int level)
@@ -234,13 +235,13 @@ public class BoardManager : MonoBehaviour
         BoardSetup ();
         InitialiseList ();
 
-     //   LayoutObjectAtRandom(obstacles, 3, 5);
+        LayoutObjectAtRandom(obstacles, 3, 5);
 
         //Determine number of enemies based on current level number, based on a logarithmic progression
         int enemyCount = 3;//(int)Mathf.Log(level, 2f);
 
         //Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
-    //    LayoutObjectAtRandom (enemyTiles, enemyCount, enemyCount);
+        LayoutObjectAtRandom (enemyTiles, enemyCount, enemyCount);
 
         //Instantiate the exit tile in the upper right hand corner of our game board
         Instantiate (exitFront, new Vector3 (columns/2  - 0.5f, rows - 1.5f, 0f), Quaternion.identity);

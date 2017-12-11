@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;      
 using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine random number generator.
+using NUnit.Framework;
 
 public class BoardManager : MonoBehaviour
 {
@@ -85,7 +86,7 @@ public class BoardManager : MonoBehaviour
             for(int y = -1; y < rows + 1; y++)
             {
                 //Choose a random tile from our array of floor tile prefabs and prepare to instantiate it.
-                GameObject toInstantiate = floorTiles[0];
+                GameObject toInstantiate = floorTiles[Random.Range(0,floorTiles.Length)];
 
                 //Check if we current position is at board edge, if so choose a random outer wall prefab from our array of outer wall tiles.
                 if (x == -1 && y == -1)
@@ -150,21 +151,21 @@ public class BoardManager : MonoBehaviour
                 if (toInstantiate == outerCornerBottomLeft)
                 {
                     BoxCollider2D leftWallCollider = instance.AddComponent(typeof(BoxCollider2D)) as BoxCollider2D;
-                    leftWallCollider.size = new Vector3(1.5f, columns*2+2);
+                    leftWallCollider.size = new Vector3(1.1f, columns*2+2);
 
                    
                 }
                 if (toInstantiate == outerCornerBottomRight)
                 {                    
                     BoxCollider2D bottomWallCollider = instance.AddComponent(typeof(BoxCollider2D)) as BoxCollider2D;
-                    bottomWallCollider.size = new Vector3(rows*2+2, 1.5f);
+                    bottomWallCollider.size = new Vector3(rows*2+0.5f, 1.5f);
                 }
                 if (toInstantiate == outerCornerTopRight)
                 {
                    
 
                     BoxCollider2D rightWallCollider = instance.AddComponent(typeof(BoxCollider2D)) as BoxCollider2D;
-                    rightWallCollider.size = new Vector3(1.5f, columns*2 + 2);
+                    rightWallCollider.size = new Vector3(1.1f, columns*2 + 2);
 
                 }
                 if (toInstantiate == outerCornerTopLeft)
@@ -229,19 +230,27 @@ public class BoardManager : MonoBehaviour
        
     }
 
-        public void SetupScene (int level)
+    public void SetupScene (int level, bool areThereObstacles, bool isThereBoss)
     {
         //Creates the outer walls and floor.
         BoardSetup ();
         InitialiseList ();
 
-        LayoutObjectAtRandom(obstacles, 3, 5);
+        //LayoutObjectAtRandom(obstacles, 3, 5);
 
         //Determine number of enemies based on current level number, based on a logarithmic progression
         int enemyCount = 3;//(int)Mathf.Log(level, 2f);
 
         //Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
-        LayoutObjectAtRandom (enemyTiles, enemyCount, enemyCount);
+      //  LayoutObjectAtRandom (enemyTiles, enemyCount, enemyCount);
+
+
+        if (level == 3)
+        {
+            
+        }
+
+
 
         //Instantiate the exit tile in the upper right hand corner of our game board
         Instantiate (exitFront, new Vector3 (columns/2  - 0.5f, rows - 1.5f, 0f), Quaternion.identity);

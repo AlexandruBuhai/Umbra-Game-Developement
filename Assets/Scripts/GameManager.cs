@@ -3,20 +3,22 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;       //Allows us to use Lists. 
 using UnityEngine.SceneManagement;
+using NUnit.Framework.Constraints;
 
 
 public class GameManager : MonoBehaviour
 {
-    public float levelStartDelay = 2f;
+    public float levelStartDelay = 0.5f;
     public static GameManager instance = null;
 
     private BoardManager boardScript;                       //Store a reference to our BoardManager which will set up the level.
-    private GameObject levelImage;
+    public GameObject levelImage;
     public Text levelText;
-    private int level = 1;                                
+    private int level = 0;                                
     private bool doingSetup = false;
-
-
+    private DarkTileManager darkTileBoardScript;
+    private bool isThereBoss = false;
+    private bool areThereObstacles = true;
 
     void Awake()
     {
@@ -31,7 +33,8 @@ public class GameManager : MonoBehaviour
 
    
         boardScript = GetComponent<BoardManager>();
-        InitGame();
+        darkTileBoardScript = GetComponent<DarkTileManager>();
+        //InitGame();
     }
 
    
@@ -40,21 +43,37 @@ public class GameManager : MonoBehaviour
     {
         doingSetup = true;
 
-        //levelImage = GameObject.Find("LevelImage");
-        //levelText = GameObject.Find("LevelText").GetComponent<Text>();
-        //levelText.text = "Room " + level.ToString();
-        //levelImage.SetActive(true);
+        levelImage = GameObject.Find("RoomImage");
+        levelText = GameObject.Find("RoomText").GetComponent<Text>();
+        levelText.text = "Room " + level.ToString();
+        levelImage.SetActive(true);
 
 
-        //Invoke("OnLevelFinishedLoading", levelStartDelay);
+        Invoke("HideLevelImage", levelStartDelay);
 
         //Call the SetupScene function of the BoardManager script, pass it current level number.
-        boardScript.SetupScene(level);
+        if (level % 2 == 1)
+        {
+            boardScript.SetupScene(level, areThereObstacles, isThereBoss);
+        }
+        else
+        {
+            darkTileBoardScript.SetupScene(level, areThereObstacles, isThereBoss);
+
+        }
+    }
+
+    void HideLevelImage()
+    {
+        levelImage.SetActive(false);
+        doingSetup = false;
+
     }
 
     //This is called each time a scene is loaded.
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
+        Debug.Log("I'm in: OnLevelFinishLoading!");
         //Add one to our level number.
         level++;
         //Call InitGame to initialize our level.

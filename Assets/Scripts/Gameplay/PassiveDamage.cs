@@ -3,7 +3,6 @@ using System.Collections;
 
 public class PassiveDamage : MonoBehaviour {
 
-	private int health;
 	private float timer; 
 	public float lowerLife;
 	public int damage;
@@ -11,10 +10,10 @@ public class PassiveDamage : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//change later for enemies/player
-		health = GameObject.Find ("Player").GetComponent<PlayerMovement> ().health;
 		timer = 0.0f;
 		lowerLife = .75f;
 		damage = 5;
+       // transform.rotation = Quaternion.AngleAxis(180.0f, transform.forward) * transform.rotation;
 	}
 	
 	// Update is called once per frame
@@ -27,7 +26,9 @@ public class PassiveDamage : MonoBehaviour {
 		if (collision.gameObject.name == "Player") {
 			if (timer > lowerLife) {
 				timer = 0;
-				GameObject.Find ("Player").GetComponent<PlayerMovement> ().health -= damage;
+                GameObject.Find ("Player").GetComponent<PlayerController> ().health -= damage;
+                //GameObject.Find("Player").GetComponent<PlayerController>().source.PlayOneShot( GameObject.Find("Player").GetComponent<PlayerController>().hitSound);
+                GameObject.Find("Player").GetComponent<PlayerController>().anim.SetTrigger("isHit");
 			}
 		}
 	}

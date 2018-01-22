@@ -30,22 +30,39 @@ public class MoleAttackAction : GOAPAction {
 
 	public override bool perform(GameObject agent){
         Mole currMole = agent.GetComponent<Mole> ();
-        if (currMole.stamina >= (cost)) {
-			
-			//currWolf.animator.Play ("wolfAttack");
+        if (currMole.stamina >= (cost))
+        {
+            if (currMole.player.health > 0)
+            {
+                currMole.animator.SetTrigger("MoleAttackLeft");
 
-            int damage = currMole.strength;
-            if (currMole.player.isBlocking) {
-                damage -= currMole.player.defense;
-			}
+                int damage = currMole.strength;
+           
+                if (currMole.health > 0)
+                {                
+                    currMole.player.clip = "attack";
+                    currMole.player.anim.SetTrigger("isHit");
+                    currMole.player.source.Stop();
+                    currMole.player.source.PlayOneShot(currMole.player.hitSound);
+                    currMole.player.health -= damage;
 
-            currMole.player.health -= damage;
-            currMole.stamina -= cost;
+                }
 
-			attacked = true;
-			return true;
-		} else {
-			return false;
-		}
+                if (currMole.source.isPlaying == false)
+                {
+                    currMole.source.PlayOneShot(currMole.attackSound, 0.6f);
+                }
+                currMole.stamina -= cost;
+
+
+                attacked = true;
+               
+            }
+            return true;
+        }
+        else
+        {
+            return false;
+        }
 	}
 }

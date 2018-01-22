@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 61070673634490230}
   m_Layer: 0
   m_Name: ExitLeft
-  m_TagString: Exit
+  m_TagString: Exit4
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

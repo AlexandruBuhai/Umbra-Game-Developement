@@ -7,7 +7,10 @@ public abstract class Enemy : MonoBehaviour, IGOAP {
 	public Animator animator;
 	public Rigidbody2D rigidBody;
 	public BoxCollider2D boxCollider;
-	public PlayerMovement player;
+    public PolygonCollider2D polygonCollider;
+    public PlayerController player;
+    public GameObject playerObj;
+    public AudioSource source;
 
 	public int health;
 	public int strength;
@@ -21,7 +24,7 @@ public abstract class Enemy : MonoBehaviour, IGOAP {
 	protected float aggroDist = 5f;
 	protected bool loop = false;
 	protected float maxStamina;
-
+    public float  controlH;
 	// Use this for initialization
 	void Start () {
 		
@@ -77,12 +80,14 @@ public abstract class Enemy : MonoBehaviour, IGOAP {
 
 			setSpeed (speed);
 
+            
+
 			if (initialSpeed < terminalSpeed) {
 				initialSpeed += acceleration;
 			}
+			Vector3 newPosition = moveDirection * initialSpeed;
+            rigidBody.velocity = newPosition;
 
-			Vector3 newPosition = moveDirection * initialSpeed * Time.deltaTime;
-			transform.position += newPosition;
 		}
 		if(dist <= minDist) {
 			nextAction.setInRange(true);
@@ -91,4 +96,5 @@ public abstract class Enemy : MonoBehaviour, IGOAP {
 			return false;
 		}
 	}
+    
 }

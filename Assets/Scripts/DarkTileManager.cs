@@ -39,8 +39,16 @@ public class DarkTileManager : MonoBehaviour {
     public GameObject outerCornerTopRight;
     public GameObject outerCornerBottomLeft;
     public GameObject outerCornerBottomRight;
+    public GameObject pickUp1;
+    public GameObject pickUp2;
+    public GameObject pickUp3;
+    public GameObject[] darkPool;
+    public GameObject[] darkSkull;
+    public GameObject[] darkSnake;
     // public GameObject cineMachine; //not used
     public GameObject mapBorders;
+    public GameObject NPC1;
+    public GameObject NPC2;
     // public GameObject CM_vcam1;
 
     private Transform boardHolder;                                  //A variable to store a reference to the transform of our Board object.
@@ -51,10 +59,10 @@ public class DarkTileManager : MonoBehaviour {
     {
 
         gridPositions.Clear ();
-        for(int x = 1; x < columns-3; x++)
+        for(int x = 1; x < columns-1; x++)
         {
             //Within each column, loop through y axis (rows).
-            for(int y = 1; y < rows-1; y++)
+            for(int y = 1; y < rows-3; y++)
             {
                 gridPositions.Add (new Vector3(x, y, 0f));
             }
@@ -63,7 +71,7 @@ public class DarkTileManager : MonoBehaviour {
 
     void BoardSetup ()
     {
-
+     
         //Instantiate Board and set boardHolder to its transform.
         // Instantiate(CM_vcam1);
         boardHolder = new GameObject ("Board").transform;
@@ -233,19 +241,32 @@ public class DarkTileManager : MonoBehaviour {
 
     public void SetupScene (int level, bool areThereObstacles, bool isThereBoss)
     {
+        NPC1 = GameObject.FindGameObjectWithTag("NPC1");
+        NPC1.SetActive(false);
+        NPC2 = GameObject.FindGameObjectWithTag("NPC2");
+        NPC2.SetActive(false);
         //Creates the outer walls and floor.
         BoardSetup ();
         InitialiseList ();
 
-        LayoutObjectAtRandom(obstacles, 3, 5);
+        LayoutObjectAtRandom(obstacles, 7, 10);
+        LayoutObjectAtRandom(darkPool, 2, 4);
+        LayoutObjectAtRandom(darkSkull, 1, 3);
+        LayoutObjectAtRandom(darkSnake, 1, 3);
 
         //Determine number of enemies based on current level number, based on a logarithmic progression
-        int enemyCount = 3;//(int)Mathf.Log(level, 2f);
+        int enemyCount = (int)Mathf.Log(level*6, 2f);
 
         //Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
-        //  LayoutObjectAtRandom (enemyTiles, enemyCount, enemyCount);
 
-        //Instantiate the exit tile in the upper right hand corner of our game board
+
+        LayoutObjectAtRandom (enemyTiles, enemyCount, enemyCount);
+
+        Instantiate (pickUp1, new Vector3 (columns/2  - 0.5f - 2.5f, rows/2 - 0.5f, 0f), Quaternion.identity);
+        Instantiate (pickUp2, new Vector3 (columns/2 - 0.5f, rows/2 - 0.5f, 0f), Quaternion.identity);
+        Instantiate (pickUp3, new Vector3 (columns/2 - 0.5f + 2.5f, rows/2 - 0.5f, 0f), Quaternion.identity);
+         
+
         Instantiate (exitFront, new Vector3 (columns/2  - 0.5f, rows - 1.5f, 0f), Quaternion.identity);
         Instantiate (exitBottom, new Vector3 (columns/2 - 0.5f, 0, 0f), Quaternion.identity);
         Instantiate (exitRight, new Vector3 (columns-1,rows/2-0.5f , 0f), Quaternion.identity);

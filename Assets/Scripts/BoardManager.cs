@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;      
 using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine random number generator.
-using NUnit.Framework;
 
 public class BoardManager : MonoBehaviour
 {
@@ -39,13 +38,24 @@ public class BoardManager : MonoBehaviour
     public GameObject outerCornerTopRight;
     public GameObject outerCornerBottomLeft;
     public GameObject outerCornerBottomRight;
+    public GameObject bossPriest;
    // public GameObject cineMachine; //not used
     public GameObject mapBorders;
+    public GameObject pickUp1;
+    public GameObject pickUp2;
+    public GameObject pickUp3;
+    public GameObject NPC1; 
+    public GameObject NPC2; 
+    public GameObject[] blood;
+    public GameObject[] books;
+    public GameObject[] water;
+    private bool killedBoss;
    // public GameObject CM_vcam1;
 
     private Transform boardHolder;                                  //A variable to store a reference to the transform of our Board object.
     private List <Vector3> gridPositions = new List <Vector3> ();   //A list of possible locations to place tiles.
 
+   
     //Clears our list gridPositions and prepares it to generate a new board.
     void InitialiseList ()
     {
@@ -54,7 +64,7 @@ public class BoardManager : MonoBehaviour
         for(int x = 1; x < columns-1; x++)
         {
             //Within each column, loop through y axis (rows).
-            for(int y = 1; y < rows-1; y++)
+            for(int y = 1; y < rows-3; y++)
             {
                 gridPositions.Add (new Vector3(x, y, 0f));
             }
@@ -70,10 +80,11 @@ public class BoardManager : MonoBehaviour
         //mapBorders = new GameObject();
         //mapBorders.transform.position = new Vector3(0, 0, 0);
        // mapBorders.transform.localScale = new Vector3(1, 1, 0);
+        Debug.Log(columns.ToString() + " " + rows.ToString() + " "); 
         BoxCollider2D mapBorderCollider = mapBorders.GetComponentInChildren<BoxCollider2D>();
         mapBorderCollider.size = new Vector3(columns+2, rows+2);
         mapBorderCollider.offset = new Vector3(columns/2+0.5f, rows/2+0.5f);
-
+        
         //Instantiate(mapBorders);
        
         //GameObject inst = Instantiate(leftWallCollider, new Vector3(-1, -1, 0f), Quaternion.identity) as GameObject;
@@ -138,15 +149,7 @@ public class BoardManager : MonoBehaviour
                 //Instantiate the GameObject instance using the prefab chosen for toInstantiate at the Vector3 corresponding to current grid position in loop, cast it to GameObject.
                 GameObject instance =
                     Instantiate (toInstantiate, new Vector3 (x, y, 0f), Quaternion.identity) as GameObject;
-                
-//                BoxCollider2D leftWallCollider = outerCornerBottomRight.AddComponent(typeof(BoxCollider2D)) as BoxCollider2D;
-//                leftWallCollider.size = new Vector3(1, columns);
-//                BoxCollider2D rightWallCollider = outerCornerBottomRight.AddComponent(typeof(BoxCollider2D)) as BoxCollider2D;
-//                rightWallCollider.size = new Vector3(1, columns);
-//                BoxCollider2D topWallCollider = outerCornerBottomRight.AddComponent(typeof(BoxCollider2D)) as BoxCollider2D;
-//                topWallCollider.size = new Vector3(rows, 3);
-//                BoxCollider2D bottomWallCollider = outerCornerBottomRight.AddComponent(typeof(BoxCollider2D)) as BoxCollider2D;
-//                bottomWallCollider.size = new Vector3(rows, 1);
+
 
                 if (toInstantiate == outerCornerBottomLeft)
                 {
@@ -218,40 +221,72 @@ public class BoardManager : MonoBehaviour
 //                        break;
 //                }
 //            }
-           
-
           
             //Choose a random tile from tileArray and assign it to tileChoice
             GameObject tileChoice = tileArray[Random.Range (0, tileArray.Length)];
 
             //Instantiate tileChoice at the position returned by RandomPosition with no change in rotation
             Instantiate(tileChoice, randomPosition, Quaternion.identity);
+            if (tileChoice.tag == "water")
+            {
+                Debug.Log("instantiating water");
+                tileChoice.transform.rotation *= Quaternion.Euler(0, 0, 180f);
+            }
         }
        
     }
 
-    public void SetupScene (int level, bool areThereObstacles, bool isThereBoss)
+    public void SetupScene (int level, bool areThereObstacles, bool isThereBoss, bool killB)
     {
         //Creates the outer walls and floor.
         BoardSetup ();
         InitialiseList ();
-
-        //LayoutObjectAtRandom(obstacles, 3, 5);
+        killedBoss = killB;
+        NPC1 = GameObject.FindGameObjectWithTag("NPC1");
+        NPC1.SetActive(false);
+        NPC2 = GameObject.FindGameObjectWithTag("NPC2");
+        NPC2.SetActive(false);
 
         //Determine number of enemies based on current level number, based on a logarithmic progression
-        int enemyCount = 3;//(int)Mathf.Log(level, 2f);
+        int enemyCount = (int)Mathf.Log(level*8, 2f);
 
         //Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
-      //  LayoutObjectAtRandom (enemyTiles, enemyCount, enemyCount);
 
+        Instantiate (pickUp1, new Vector3 (columns/2  - 0.5f - 2.5f, rows/2 - 0.5f, 0f), Quaternion.identity);
+        Instantiate (pickUp2, new Vector3 (columns/2 - 0.5f, rows/2 - 0.5f, 0f), Quaternion.identity);
+        Instantiate (pickUp3, new Vector3 (columns/2 - 0.5f + 2.5f, rows/2 - 0.5f, 0f), Quaternion.identity);
 
-        if (level == 3)
+        if (isThereBoss)
         {
-            
+            Instantiate(bossPriest, new Vector3(columns / 2 - 0.5f, rows - 5, 0f), Quaternion.identity);
+            LayoutObjectAtRandom(water, 6, 16);    
+        }
+        else
+        {
+            Debug.Log("Level1 " + killedBoss.ToString());
+            if (level != 1)
+            {
+                LayoutObjectAtRandom(enemyTiles, enemyCount, enemyCount); 
+            }
+            else if (level == 1)
+            {
+                NPC1.SetActive(true);
+                Debug.Log("Kill boss status: " + killedBoss.ToString());
+                if (killedBoss)
+                {
+
+                    Debug.Log("I'm trying to create the mole!");
+                    NPC2.SetActive(true);
+                }
+            }
+
+            LayoutObjectAtRandom(obstacles, 4, 12);    
+            LayoutObjectAtRandom(blood, 2, 5);        
+            LayoutObjectAtRandom(books, 0, 4);        
+
         }
 
-
-
+      
         //Instantiate the exit tile in the upper right hand corner of our game board
         Instantiate (exitFront, new Vector3 (columns/2  - 0.5f, rows - 1.5f, 0f), Quaternion.identity);
         Instantiate (exitBottom, new Vector3 (columns/2 - 0.5f, 0, 0f), Quaternion.identity);

@@ -5,9 +5,29 @@ TagManager:
   serializedVersion: 2
   tags:
   - Food
-  - Exit
   - Enemy
   - Soda
+  - Heart
+  - Speed
+  - Health
+  - Damage
+  - NPC1
+  - Exit1
+  - Exit2
+  - Exit3
+  - Exit4
+  - Sp3
+  - Sp4
+  - Sp1
+  - Sp2
+  - NPC2
+  - DeadEnemy
+  - RoomImage
+  - RoomText
+  - Skull
+  - water
+  - LevelText
+  - GameManager
   layers:
   - Default
   - TransparentFX
@@ -18,7 +38,7 @@ TagManager:
   - 
   - 
   - BlockingLayer
-  - 
+  - Canvas
   - 
   - 
   - 

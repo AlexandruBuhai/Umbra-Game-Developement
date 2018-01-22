@@ -2,6 +2,9 @@
 
 Umbra is a pixelart-randomly-generated-dungeon-RPG game, made for the Game developement course at MFF UK 2017.
 
+# Builds
+[Windows](https://drive.google.com/file/d/1AVYMS5O40eXod_FSzDvq5qxsCiAqTkar/view?usp=sharing)   
+[Mac](https://drive.google.com/open?id=1c1AVtX50DrE6XqbdSKfcXb4i7jW3eZhb)
 
 # Team
 Bolšich Daria  

@@ -1,4 +1,5 @@
 # Umbra
+## This is a work in progress
 
 Umbra is a pixelart-randomly-generated-dungeon-RPG game, made for the Game developement course at MFF UK 2017.
 
@@ -17,4 +18,7 @@ Brent Owens - https://github.com/sploreg/goap
 Matt Schell (Unity tutorial)  
 Mattia Cupelli for the music  
 
-# This is a work in progress
+# Images  
+![umbra](https://user-images.githubusercontent.com/23296075/35680572-0f910982-075b-11e8-99a3-5e0cec7c9a7e.png)
+![example_doors](https://user-images.githubusercontent.com/23296075/35680589-19b893e4-075b-11e8-81cc-b3cfc402031b.png)
+![priest-sheet](https://user-images.githubusercontent.com/23296075/35680742-7acf772e-075b-11e8-9d62-92f923277fe5.png)

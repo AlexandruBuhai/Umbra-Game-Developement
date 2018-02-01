@@ -8,7 +8,7 @@ Umbra is a pixelart-randomly-generated-dungeon-RPG game, made for the Game devel
 [Mac](https://drive.google.com/open?id=1c1AVtX50DrE6XqbdSKfcXb4i7jW3eZhb)
 
 # Team
-Bolšich Daria  
+Bolshikh Daria  
 Buhai Alexandru  
 Rybín Filip 
 
@@ -18,7 +18,11 @@ Brent Owens - https://github.com/sploreg/goap
 Matt Schell (Unity tutorial)  
 Mattia Cupelli for the music  
 
+# Video
+
+[![video-gameplay](images/youtube-vid.png)](https://www.youtube.com/watch?v=CDiHTYTO6Uo)
+
 # Images  
-![umbra](https://user-images.githubusercontent.com/23296075/35680572-0f910982-075b-11e8-99a3-5e0cec7c9a7e.png)
-![example_doors](https://user-images.githubusercontent.com/23296075/35680589-19b893e4-075b-11e8-81cc-b3cfc402031b.png)
-![priest-sheet](https://user-images.githubusercontent.com/23296075/35680742-7acf772e-075b-11e8-9d62-92f923277fe5.png)
+<img src="images/umbra.png" width="700">  
+<img src="images/tile-set.png" width="700">  
+<img src="images/priest-sheet.png" width="700">  
